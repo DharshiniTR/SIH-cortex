@@ -6,6 +6,9 @@
  * OpenAPI spec version: 0.1.0
  */
 
-export interface HealthStatus {
-  status: string;
+export interface Receipt {
+  applicationNumber: string;
+  receiptNumber: string;
+  amount: number;
+  paidOn: string;
 }

@@ -6,6 +6,10 @@
  * OpenAPI spec version: 0.1.0
  */
 
-export interface HealthStatus {
-  status: string;
+export interface ApplicationUpdate {
+  applicantName: string;
+  phone: string;
+  address: string;
+  district: string;
+  taluk: string;
 }

@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "Tamil Nadu e-Sevai Portal"
+description = "A full-stack Tamil Nadu government e-Sevai and e-District portal clone with legacy government styling, searchable public services, citizen applications, status tracking, and certificate downloads."
+version = "1.0.0"
+id = "artifacts/tn-es-evai-portal"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 23092
+
+[services.development]
+run = "pnpm --filter @workspace/tn-es-evai-portal run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/tn-es-evai-portal", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/tn-es-evai-portal/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "23092"
+BASE_PATH = "/"

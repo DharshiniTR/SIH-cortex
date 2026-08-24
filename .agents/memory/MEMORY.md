@@ -1,0 +1,1 @@
+- [Generated Zod compatibility](generated-zod-compatibility.md) — Keep the Zod runtime aligned with Orval output for integer schemas.
