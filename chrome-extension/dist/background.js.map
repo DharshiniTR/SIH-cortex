@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../src/background.ts"],
+  "sourcesContent": ["chrome.downloads.onChanged.addListener(async (delta) => {\n  if (delta.state?.current !== \"complete\" || delta.id === undefined) return;\n\n  const [download] = await chrome.downloads.search({ id: delta.id });\n  if (!download?.filename) return;\n\n  const stored = await chrome.storage.local.get({ pendingDownloads: [] });\n  const pendingDownloads = Array.isArray(stored.pendingDownloads)\n    ? stored.pendingDownloads\n    : [];\n  pendingDownloads.push({\n      id: download.id,\n      filename: download.filename,\n      url: download.url || \"\",\n      mime: download.mime || \"\",\n      referrer: download.referrer || \"\",\n  });\n  await chrome.storage.local.set({ pendingDownloads });\n\n  await chrome.tabs.create({\n    url: chrome.runtime.getURL(\"upload.html\"),\n    active: true,\n  });\n});"],
+  "mappings": ";;;AAAA,SAAO,UAAU,UAAU,YAAY,OAAO,UAAU;AACtD,QAAI,MAAM,OAAO,YAAY,cAAc,MAAM,OAAO,OAAW;AAEnE,UAAM,CAAC,QAAQ,IAAI,MAAM,OAAO,UAAU,OAAO,EAAE,IAAI,MAAM,GAAG,CAAC;AACjE,QAAI,CAAC,UAAU,SAAU;AAEzB,UAAM,SAAS,MAAM,OAAO,QAAQ,MAAM,IAAI,EAAE,kBAAkB,CAAC,EAAE,CAAC;AACtE,UAAM,mBAAmB,MAAM,QAAQ,OAAO,gBAAgB,IAC1D,OAAO,mBACP,CAAC;AACL,qBAAiB,KAAK;AAAA,MAClB,IAAI,SAAS;AAAA,MACb,UAAU,SAAS;AAAA,MACnB,KAAK,SAAS,OAAO;AAAA,MACrB,MAAM,SAAS,QAAQ;AAAA,MACvB,UAAU,SAAS,YAAY;AAAA,IACnC,CAAC;AACD,UAAM,OAAO,QAAQ,MAAM,IAAI,EAAE,iBAAiB,CAAC;AAEnD,UAAM,OAAO,KAAK,OAAO;AAAA,MACvB,KAAK,OAAO,QAAQ,OAAO,aAAa;AAAA,MACxC,QAAQ;AAAA,IACV,CAAC;AAAA,EACH,CAAC;",
+  "names": []
+}
