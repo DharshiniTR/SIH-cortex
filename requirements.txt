@@ -1,0 +1,32 @@
+# ---------------------------------------------------------------------
+# SEVAALERT — Phase 1 (zero-shot Qwen2.5-VL-3B-Instruct + PaddleOCR)
+# CUDA build — you confirmed GPU access.
+# ---------------------------------------------------------------------
+
+# --- Core ML stack ---
+# Install torch FIRST with the CUDA index (see install command in chat,
+# not just `pip install -r requirements.txt`, or you may get the CPU wheel).
+torch==2.4.1
+torchvision==0.19.1
+transformers==4.49.0      # Qwen2.5-VL requires >=4.49.0 (not in the codebase before this)
+accelerate==0.34.2
+qwen-vl-utils==0.0.8
+bitsandbytes==0.44.1        # enables 4-bit/8-bit quantized loading later if needed
+
+# --- OCR (local/offline, no cloud calls) ---
+paddleocr==2.9.1
+paddlepaddle==2.6.2     # GPU build; PaddleOCR itself still works if this
+                             # particular wheel doesn't match your CUDA version —
+                             # we verify in the next step.
+
+# --- PDF -> page images (requires system package: poppler-utils) ---
+pdf2image==1.17.0
+pillow==10.4.0
+
+# --- Data/schema/validation ---
+pydantic==2.9.2
+python-dateutil==2.9.0.post0
+numpy==1.26.4
+
+# --- utility ---
+python-dotenv==1.0.1
