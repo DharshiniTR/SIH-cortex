@@ -72,7 +72,8 @@
   --badge-outline: rgba(0, 0, 0, 0.05);
 
   /* Automatic computation of border around primary / danger buttons */
-  --opaque-button-border-intensity: -8; /* In terms of percentages */
+  --opaque-button-border-intensity: -8;
+  /* In terms of percentages */
 
   /* Backgrounds applied on top of other backgrounds when hovered/active */
   --elevate-1: rgba(0, 0, 0, 0.03);
@@ -143,9 +144,12 @@
   --app-font-sans: 'Trebuchet MS', 'Segoe UI', sans-serif;
   --app-font-serif: Georgia, serif;
   --app-font-mono: Menlo, monospace;
-  --radius: 0.5rem; /* 8px */
-  --shadow-2xs: 0px 2px 0px 0px hsl(202.8169 89.1213% 53.1373% / 0); /*replace with H S L */
-  --shadow-xs: 0px 2px 0px 0px hsl(202.8169 89.1213% 53.1373% / 0); /*replace with H S L */
+  --radius: 0.5rem;
+  /* 8px */
+  --shadow-2xs: 0px 2px 0px 0px hsl(202.8169 89.1213% 53.1373% / 0);
+  /*replace with H S L */
+  --shadow-xs: 0px 2px 0px 0px hsl(202.8169 89.1213% 53.1373% / 0);
+  /*replace with H S L */
   --shadow-sm:
     0px 2px 0px 0px hsl(202.8169 89.1213% 53.1373% / 0),
     0px 1px 2px -1px hsl(202.8169 89.1213% 53.1373% / 0);
@@ -169,59 +173,39 @@
 
   /* Fallback for older browsers */
   --sidebar-primary-border: hsl(var(--sidebar-primary));
-  --sidebar-primary-border: hsl(
-    from hsl(var(--sidebar-primary)) h s
-      calc(l + var(--opaque-button-border-intensity)) / alpha
-  );
+  --sidebar-primary-border: hsl(from hsl(var(--sidebar-primary)) h s calc(l + var(--opaque-button-border-intensity)) / alpha);
 
   /* Fallback for older browsers */
   --sidebar-accent-border: hsl(var(--sidebar-accent));
-  --sidebar-accent-border: hsl(
-    from hsl(var(--sidebar-accent)) h s
-      calc(l + var(--opaque-button-border-intensity)) / alpha
-  );
+  --sidebar-accent-border: hsl(from hsl(var(--sidebar-accent)) h s calc(l + var(--opaque-button-border-intensity)) / alpha);
 
   /* Fallback for older browsers */
   --primary-border: hsl(var(--primary));
-  --primary-border: hsl(
-    from hsl(var(--primary)) h s
-      calc(l + var(--opaque-button-border-intensity)) / alpha
-  );
+  --primary-border: hsl(from hsl(var(--primary)) h s calc(l + var(--opaque-button-border-intensity)) / alpha);
 
   /* Fallback for older browsers */
   --secondary-border: hsl(var(--secondary));
-  --secondary-border: hsl(
-    from hsl(var(--secondary)) h s
-      calc(l + var(--opaque-button-border-intensity)) / alpha
-  );
+  --secondary-border: hsl(from hsl(var(--secondary)) h s calc(l + var(--opaque-button-border-intensity)) / alpha);
 
   /* Fallback for older browsers */
   --muted-border: hsl(var(--muted));
-  --muted-border: hsl(
-    from hsl(var(--muted)) h s calc(l + var(--opaque-button-border-intensity)) /
-      alpha
-  );
+  --muted-border: hsl(from hsl(var(--muted)) h s calc(l + var(--opaque-button-border-intensity)) / alpha);
 
   /* Fallback for older browsers */
   --accent-border: hsl(var(--accent));
-  --accent-border: hsl(
-    from hsl(var(--accent)) h s
-      calc(l + var(--opaque-button-border-intensity)) / alpha
-  );
+  --accent-border: hsl(from hsl(var(--accent)) h s calc(l + var(--opaque-button-border-intensity)) / alpha);
 
   /* Fallback for older browsers */
   --destructive-border: hsl(var(--destructive));
-  --destructive-border: hsl(
-    from hsl(var(--destructive)) h s
-      calc(l + var(--opaque-button-border-intensity)) / alpha
-  );
+  --destructive-border: hsl(from hsl(var(--destructive)) h s calc(l + var(--opaque-button-border-intensity)) / alpha);
 }
 
 .dark {
   --button-outline: rgba(255, 255, 255, 0.1);
   --badge-outline: rgba(255, 255, 255, 0.05);
 
-  --opaque-button-border-intensity: 9; /* In terms of percentages */
+  --opaque-button-border-intensity: 9;
+  /* In terms of percentages */
 
   /* Backgrounds applied on top of other backgrounds when hovered/active */
   --elevate-1: rgba(255, 255, 255, 0.04);
@@ -341,6 +325,7 @@
  * need to be distinguished from eachother visually.
  */
 @layer utilities {
+
   /* Hide ugly search cancel button in Chrome until we can style it properly */
   input[type='search']::-webkit-search-cancel-button {
     @apply hidden;
@@ -356,11 +341,9 @@
   /* .no-default-hover-elevate/no-default-active-elevate is an escape hatch so consumers of
    * buttons/badges can remove the automatic brightness adjustment on interactions
    * and program their own. */
-  .no-default-hover-elevate {
-  }
+  .no-default-hover-elevate {}
 
-  .no-default-active-elevate {
-  }
+  .no-default-active-elevate {}
 
   /**
    * Toggleable backgrounds go behind the content. Hoverable/active goes on top.
@@ -432,15 +415,194 @@
   }
 }
 
-/* Tamil Nadu public-service counter: compact, squared, ink-on-paper. */
-:root { color-scheme: light; }
-body { min-width: 320px; background: #f1efe8; }
-button, input, select, textarea { border-radius: 2px !important; }
-.portal-grid { background-image: linear-gradient(rgba(30, 62, 52, .035) 1px, transparent 1px), linear-gradient(90deg, rgba(30, 62, 52, .035) 1px, transparent 1px); background-size: 24px 24px; }
-.tn-shadow { box-shadow: 0 2px 0 rgba(23, 62, 49, .13), 0 8px 18px rgba(23, 62, 49, .05); }
-.gov-stripe { height: 4px; background: repeating-linear-gradient(90deg, #0e6a73 0 16px, #e1b944 16px 32px, #4b8b53 32px 48px); }
-.skeleton { background: linear-gradient(90deg, #e3e0d7 25%, #eeece5 37%, #e3e0d7 63%); background-size: 400% 100%; animation: shimmer 1.3s ease infinite; }
-@keyframes shimmer { 0% { background-position: 100% 0; } 100% { background-position: -100% 0; } }
-.portal-link { transition: background-color .15s ease, color .15s ease; }
-.portal-link:hover { background-color: rgba(224, 185, 68, .16); color: #f0cc62; }
-.portal-focus:focus-visible { outline: 2px solid #e1b944; outline-offset: 2px; }
+/* ============================================================
+   Tamil Nadu e-Sevai – Official Portal Theme
+   Navy · White · Gold  |  Inter · Squared corners
+   ============================================================ */
+
+/* Google Fonts – must be first @import */
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap');
+
+/* ── Design tokens ──────────────────────────────────────────── */
+:root {
+  color-scheme: light;
+
+  /* Brand palette */
+  --tn-navy: #0a2240;
+  /* primary dark */
+  --tn-navy-dark: #061626;
+  /* utility bar  */
+  --tn-navy-mid: #0e3060;
+  /* dividers     */
+  --tn-navy-hover: #0d2e56;
+  /* hover states */
+  --tn-gold: #e8a020;
+  /* accent / CTA */
+  --tn-gold-light: #fdf3e0;
+  /* alert tint   */
+
+  /* Functional */
+  --tn-action: #0a5c8a;
+  /* interactive blue (buttons, links) */
+  --tn-action-hover: #084a72;
+  --tn-success: #1a7a3f;
+  --tn-warning: #a06000;
+  --tn-danger: #922828;
+
+  /* Surface / background */
+  --tn-bg: #f2f4f8;
+  --tn-surface: #ffffff;
+  --tn-surface-alt: #f8f9fb;
+  --tn-border: #cdd6e3;
+  --tn-border-light: #e3e9f1;
+
+  /* Typography */
+  --tn-text: #18283a;
+  --tn-text-muted: #54687a;
+  --tn-text-dim: #8a9bae;
+}
+
+/* ── Base ───────────────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  min-width: 320px;
+  background: var(--tn-bg);
+  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  color: var(--tn-text);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Squared UI throughout */
+button,
+input,
+select,
+textarea {
+  border-radius: 0 !important;
+}
+
+/* Subtle scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--tn-surface-alt);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--tn-border);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #a8b8cc;
+}
+
+/* ── Page background ─────────────────────────────────────────── */
+.portal-grid {
+  background-color: var(--tn-bg);
+  background-image:
+    linear-gradient(var(--tn-border-light) 1px, transparent 1px),
+    linear-gradient(90deg, var(--tn-border-light) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+/* ── National identity stripe (tricolour) ────────────────────── */
+.gov-stripe {
+  height: 4px;
+  background: linear-gradient(90deg,
+      #ff6600 0% 33.33%,
+      #ffffff 33.33% 66.66%,
+      #138808 66.66% 100%);
+  flex-shrink: 0;
+}
+
+/* ── National Emblem badge ───────────────────────────────────── */
+/* Container that wraps the lion-capital SVG and department text */
+.gov-emblem-badge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  background: #0d2d57;
+  border: 2px solid var(--tn-gold);
+  flex-shrink: 0;
+}
+
+.gov-emblem-badge svg {
+  display: block;
+}
+
+.gov-emblem-badge .badge-label {
+  font-size: 7px;
+  font-weight: 900;
+  letter-spacing: .04em;
+  color: var(--tn-gold);
+  line-height: 1;
+  margin-top: 2px;
+  text-align: center;
+}
+
+/* ── Card / elevation ────────────────────────────────────────── */
+.tn-shadow {
+  box-shadow:
+    0 1px 2px rgba(10, 34, 64, .06),
+    0 4px 16px rgba(10, 34, 64, .07);
+}
+
+/* ── Skeleton shimmer ────────────────────────────────────────── */
+.skeleton {
+  background: linear-gradient(90deg,
+      #dde3ec 25%,
+      #eaedf5 37%,
+      #dde3ec 63%);
+  background-size: 400% 100%;
+  animation: shimmer 1.4s ease infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 100% 0;
+  }
+
+  100% {
+    background-position: -100% 0;
+  }
+}
+
+/* ── Sidebar navigation ──────────────────────────────────────── */
+.portal-link {
+  transition: background-color .14s ease, color .14s ease, border-color .14s ease;
+}
+
+.portal-link:hover {
+  background-color: rgba(10, 34, 64, .06);
+  color: var(--tn-navy);
+}
+
+.portal-nav-active {
+  border-left-color: var(--tn-gold) !important;
+  background-color: rgba(10, 34, 64, .09) !important;
+  color: var(--tn-navy) !important;
+  font-weight: 700;
+}
+
+/* ── Focus ring ──────────────────────────────────────────────── */
+.portal-focus:focus-visible {
+  outline: 2px solid var(--tn-gold);
+  outline-offset: 2px;
+}
+
+/* ── Generic surface ─────────────────────────────────────────── */
+.portal-card {
+  background: var(--tn-surface);
+  border: 1px solid var(--tn-border);
+}
