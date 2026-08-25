@@ -1,1 +1,2 @@
 - [Chrome extension file access](chrome-extension-file-access.md) — completed-download metadata does not grant silent filesystem read access.
+- [DigiLocker Supabase schema](digilocker-supabase-schema.md) — live storage and identity schema differs from the original screenshot.

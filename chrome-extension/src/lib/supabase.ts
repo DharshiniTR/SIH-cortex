@@ -28,11 +28,11 @@ export const supabase = createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY, {
 
 export async function getSettings() {
   const result = await chrome.storage.local.get({
-    bucket: "documents",
+    bucket: "digilocker",
     category: "Downloaded document",
   });
   return {
-    bucket: String(result.bucket || "documents"),
+    bucket: String(result.bucket || "digilocker"),
     category: String(result.category || "Downloaded document"),
   };
 }

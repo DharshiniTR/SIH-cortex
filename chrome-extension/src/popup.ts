@@ -38,7 +38,7 @@ async function renderSettings() {
     <div class="row"><div><h2>Connected</h2><p class="muted">${user.email}</p></div><button id="signout" class="secondary">Sign out</button></div>
     <div class="divider"></div>
     <h2>Upload settings</h2>
-    <p>Choose the Supabase Storage bucket used by your DigiLocker app.</p>
+    <p>Choose the Supabase Storage bucket used by your DigiLocker app. The current project bucket is <strong>digilocker</strong>.</p>
     <form id="settings">
       <label>Storage bucket<input name="bucket" value="${settings.bucket}" required /></label>
       <label>Category<input name="category" value="${settings.category}" required /></label>

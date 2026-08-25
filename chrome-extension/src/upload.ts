@@ -63,14 +63,11 @@ async function init() {
         upsert: false,
       });
       if (upload.error) throw upload.error;
-      const { data: publicUrl } = supabase.storage.from(settings.bucket).getPublicUrl(path);
-      const insert = await supabase.from("docs").insert({
-        name: String(form.get("name")),
-        email: user.email,
+      const insert = await supabase.from("documents").insert({
+        user_id: user.id,
+        original_name: String(form.get("name")),
         identifier: String(form.get("identifier")),
-        url: publicUrl.publicUrl,
-        category: settings.category,
-        exported: true,
+        storage_path: path,
       });
       if (insert.error) throw insert.error;
       await chrome.storage.local.set({ pendingDownloads: pendingDownloads.slice(1) });

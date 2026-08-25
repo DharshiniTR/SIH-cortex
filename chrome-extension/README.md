@@ -17,12 +17,12 @@ In Chrome, open `chrome://extensions`, enable **Developer mode**, choose
 ## Supabase assumptions
 
 - Supabase Auth is enabled for email/password sign-in.
-- The Storage bucket configured in the extension exists. The default is
-  `documents`; change it from the extension popup if needed.
-- The authenticated user is allowed by RLS to insert their own email into
-  `docs` and upload beneath their own user ID.
-- The `docs` table has the fields `name`, `email`, `identifier`, `url`,
-  `category`, and `exported`, matching the provided schema.
+- The Storage bucket configured in the extension exists. The current default
+  is `digilocker`; change it from the extension popup if needed.
+- The authenticated user is allowed by RLS to insert their own `user_id` into
+  `documents` and upload beneath their own user ID.
+- The `documents` table has `user_id`, `original_name`, `identifier`, and
+  `storage_path`.
 
 The extension uses only the publishable Supabase client key. Never put a
 service-role key in a browser extension.
