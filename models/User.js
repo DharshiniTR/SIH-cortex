@@ -19,6 +19,11 @@ const userSchema = new mongoose.Schema({
         min: 6,
         max: 1024
     },
+    mobile: {
+        type: String,
+        required: true,
+        length: 10
+    },
     date: {
         type: Date,
         default: Date.now
