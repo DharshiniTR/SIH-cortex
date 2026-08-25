@@ -14,13 +14,16 @@ function escapeHtml(value: string) {
 }
 
 async function init() {
-  const { data: { user } } = await supabase.auth.getUser();
+  const storedAuth = await chrome.storage.local.get(["auth-token", "user-email"]);
+  const token = storedAuth["auth-token"];
+  const email = storedAuth["user-email"];
+  
   const stored = await chrome.storage.local.get({ pendingDownloads: [] });
   const pendingDownloads = Array.isArray(stored.pendingDownloads)
     ? stored.pendingDownloads as PendingDownload[]
     : [];
   const pending = pendingDownloads[0];
-  if (!user) {
+  if (!token || !email) {
     app.innerHTML = `<h1>Sign in required</h1><p>Open the DigiLocker extension and sign in before saving downloads.</p>`;
     return;
   }
@@ -32,7 +35,7 @@ async function init() {
   app.innerHTML = `
     <h1>Save this download?</h1>
     <p>DigiLocker can store a copy in your account for access from the app. Chrome requires you to choose the local file before an extension can upload it.</p>
-    <div class="file"><strong>${escapeHtml(pending.filename.split(/[\\/]/).pop() || pending.filename)}</strong><br /><span class="muted">${escapeHtml(user.email || "")}</span></div>
+    <div class="file"><strong>${escapeHtml(pending.filename.split(/[\\/]/).pop() || pending.filename)}</strong><br /><span class="muted">${escapeHtml(email || "")}</span></div>
     <form id="upload-form">
       <label>Downloaded file<input type="file" name="file" required /></label>
       <label>Document name<input name="name" placeholder="e.g. Driving licence" required /></label>
@@ -55,21 +58,44 @@ async function init() {
     try {
       const file = (form.get("file") as File | null);
       if (!file) throw new Error("Choose the downloaded file to continue.");
-      const settings = await getSettings();
-      const safeName = pending.filename.split(/[\\/]/).pop()?.replace(/[^a-zA-Z0-9._-]/g, "_") || `document-${pending.id}`;
-      const path = `${user.id}/${crypto.randomUUID()}-${safeName}`;
-      const upload = await supabase.storage.from(settings.bucket).upload(path, file, {
-        contentType: pending.mime || file.type || "application/octet-stream",
-        upsert: false,
-      });
-      if (upload.error) throw upload.error;
-      const insert = await supabase.from("documents").insert({
-        user_id: user.id,
-        original_name: String(form.get("name")),
-        identifier: String(form.get("identifier")),
-        storage_path: path,
-      });
-      if (insert.error) throw insert.error;
+      const { data: existingDoc } = await supabase
+        .from('docs')
+        .select('*')
+        .eq('email', email)
+        .eq('name', String(form.get("name")))
+        .maybeSingle();
+
+      if (existingDoc) {
+        throw new Error("A document with this name already exists.");
+      }
+
+      // Convert file to Base64 Data URL to match the SIH-cortex frontend behavior
+      const fileToDataUrl = (file: File): Promise<string> => {
+        return new Promise((resolve, reject) => {
+          const reader = new FileReader();
+          reader.onload = () => resolve(reader.result as string);
+          reader.onerror = () => reject(new Error("Failed to read file"));
+          reader.readAsDataURL(file);
+        });
+      };
+
+      const base64Url = await fileToDataUrl(file);
+
+      const { error: insertErr } = await supabase
+        .from('docs')
+        .insert([{
+            name: String(form.get("name")),
+            email: email,
+            identifier: String(form.get("identifier")),
+            url: base64Url,
+            category: 'Government Certificate',
+            exported: false
+        }]);
+
+      if (insertErr) {
+        throw new Error(insertErr.message || "Failed to save document metadata.");
+      }
+
       await chrome.storage.local.set({ pendingDownloads: pendingDownloads.slice(1) });
       app.innerHTML = `<h1>Saved to DigiLocker</h1><p class="success">Your document and its details were added successfully.</p>`;
     } catch (cause) {

@@ -2,7 +2,7 @@ import { createClient } from "@supabase/supabase-js";
 
 const SUPABASE_URL = "https://esbnkksbtaikqzalcwhe.supabase.co";
 const SUPABASE_PUBLISHABLE_KEY =
-  "sb_publishable_JGX5gZ0BIzjWjTkkhucHEQQ_ipWXxCoz";
+  "sb_publishable_JGX5gZ0BIzWjTkkhucHEQQ_ipWXxCoz";
 
 const chromeStorage = {
   getItem: async (key: string) => {
