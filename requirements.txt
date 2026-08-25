@@ -1,0 +1,21 @@
+# --- Core API (always needed) ---
+fastapi>=0.111
+uvicorn[standard]>=0.30
+pydantic>=2.7
+
+# --- Telephony (optional — omit to stay in DEV MODE with no real calls) ---
+twilio>=9.0
+
+# --- Real TTS, lightweight option (recommended to start with) ---
+# Real spoken audio, one voice per language, needs internet at generation
+# time, no GPU/compiler needed. Uncomment to enable:
+# gTTS>=2.5
+
+# --- Real TTS, high-quality option (optional — omit to stay on gTTS/mock) ---
+# Needs a GPU for reasonable latency, ~a few GB of disk for model weights,
+# a C++ build toolchain (this is the one that's painful on Windows), and a
+# Hugging Face account with access granted to ai4bharat/indic-parler-tts.
+# torch>=2.2
+# parler-tts @ git+https://github.com/huggingface/parler-tts.git
+# transformers>=4.40
+# soundfile>=0.12
