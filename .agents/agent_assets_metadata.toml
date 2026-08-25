@@ -1,0 +1,16 @@
+uploads = []
+generated = []
+
+[[outputs]]
+id = "1eA8fgv-GSBnThwDgIv73"
+uri = "file://chrome-extension/digilocker-extension.zip"
+type = "unspecified"
+title = "DigiLocker Chrome Extension"
+description = "Installable Chrome extension package. Load the included dist folder from chrome://extensions with Developer mode enabled."
+logical_id = "bd9ef5dd-d75b-4e47-8c90-3882ad06f2b0"
+content_hash = "sha256:6f6a11c8477f0cc4213bd18f907f50ccca5aac297991f269d2b9a963b9858886"
+size = 888808
+mtime_ms = 1787630645209
+storage_uri = "gcs://replit-rams-assets-pike/rams/assets/repl:b92d13d2-f844-40f4-a29c-e2a59268cfc8/bd9ef5dd-d75b-4e47-8c90-3882ad06f2b0/61027a8d-9713-4786-8884-3b6bb1f312a4"
+storage_version_token = "1787630656290327"
+content_type = "application/octet-stream"

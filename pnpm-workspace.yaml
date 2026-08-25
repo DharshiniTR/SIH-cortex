@@ -36,6 +36,7 @@ minimumReleaseAgeExclude:
 
 packages:
   - artifacts/*
+  - chrome-extension
   - lib/*
   - lib/integrations/*
   - scripts

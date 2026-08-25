@@ -1,0 +1,1 @@
+- [Chrome extension file access](chrome-extension-file-access.md) — completed-download metadata does not grant silent filesystem read access.

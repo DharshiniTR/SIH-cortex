@@ -1,0 +1,16 @@
+{
+  "manifest_version": 3,
+  "name": "DigiLocker Download Saver",
+  "description": "Save downloaded documents to your DigiLocker account.",
+  "version": "0.1.0",
+  "permissions": ["downloads", "storage", "notifications"],
+  "host_permissions": ["https://esbnkksbtaikqzalcwhe.supabase.co/*"],
+  "action": {
+    "default_title": "DigiLocker",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "options_page": "popup.html"
+}

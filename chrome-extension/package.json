@@ -1,0 +1,18 @@
+{
+  "name": "@workspace/digilocker-extension",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node build.mjs",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.57.0"
+  },
+  "devDependencies": {
+    "@types/chrome": "^0.1.5",
+    "esbuild": "^0.25.0",
+    "typescript": "~5.9.3"
+  }
+}
